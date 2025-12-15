@@ -8,7 +8,7 @@ namespace Graphs
 {
     internal class Graph<TNode> where TNode : notnull
     {
-        private Dictionary<TNode, LinkedList<TNode>> _nodes;
+        private Dictionary<TNode, LinkedList<TNode>> _nodes; // Adjacency list of nodes
         private bool _isDirectional;
 
         public Graph(bool isDirectional)
@@ -27,6 +27,7 @@ namespace Graphs
         {
             _nodes[src].AddLast(dst);
 
+            // When not directional, connection goes both ways
             if (!_isDirectional)
             {
                 _nodes[dst].AddLast(src);

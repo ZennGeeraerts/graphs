@@ -1,6 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Graphs;
 
+// p0—p1—p2
+// |     |
+// p3—p4—p5
+// |
+// p6
+// |
+// p7
+
 Graph<Person> graph = new Graph<Person>(true);
 
 Person p0 = new Person(0, "Calderon");

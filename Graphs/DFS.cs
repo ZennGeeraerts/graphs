@@ -25,6 +25,7 @@ namespace Graphs
             stack.Push(start);
             visited.Add(start);
 
+            // Keep going as long as we have nodes in the stack
             while (stack.Count > 0)
             {
                 TNode node = stack.Pop();
@@ -36,14 +37,14 @@ namespace Graphs
                     break;
                 }
 
-                LinkedList<TNode> connections = _graph.GetConnections(node);
+                LinkedList<TNode> neighbours = _graph.GetConnections(node);
 
-                foreach (TNode connNode in connections)
+                foreach (TNode neighbour in neighbours)
                 {
-                    if (!visited.Contains(connNode))
+                    if (!visited.Contains(neighbour))
                     {
-                        visited.Add(connNode);
-                        stack.Push(connNode);
+                        visited.Add(neighbour);
+                        stack.Push(neighbour);
                     }
                 }
             }

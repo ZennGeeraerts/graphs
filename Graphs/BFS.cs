@@ -11,10 +11,7 @@ namespace Graphs
     {
         private Graph<TNode> _graph;
 
-        public BFS(Graph<TNode> graph)
-        {
-            _graph = graph;
-        }
+        public BFS(Graph<TNode> graph) { _graph = graph; }
 
         public List<TNode> FindPath(TNode start, TNode? dst, List<TNode>? visited = null)
         {
@@ -29,6 +26,7 @@ namespace Graphs
             queue.Enqueue(start);
             visited.Add(start);
 
+            // Keep going as long as we have nodes in the queue
             while (queue.Count > 0)
             {
                 TNode node = queue.Dequeue();
@@ -40,14 +38,14 @@ namespace Graphs
                     break;
                 }
 
-                LinkedList<TNode> connections = _graph.GetConnections(node);
+                LinkedList<TNode> neighbours = _graph.GetConnections(node);
 
-                foreach (TNode connNode in connections)
+                foreach (TNode neighbour in neighbours)
                 {
-                    if (!visited.Contains(connNode))
+                    if (!visited.Contains(neighbour))
                     {
-                        visited.Add(connNode);
-                        queue.Enqueue(connNode);
+                        visited.Add(neighbour);
+                        queue.Enqueue(neighbour);
                     }
                 }
             }
