@@ -17,6 +17,11 @@ namespace Graphs
             _isDirectional = isDirectional;
         }
 
+        public int Count
+        {
+            get { return _nodes.Count; }
+        }
+
         public void AddNode(TNode node)
         {
             var list = new LinkedList<TNode>();

@@ -13,13 +13,9 @@ namespace Graphs
 
         public BFS(Graph<TNode> graph) { _graph = graph; }
 
-        public List<TNode> FindPath(TNode start, TNode? dst, List<TNode>? visited = null)
+        public List<TNode> FindPath(TNode start, TNode? dst)
         {
-            if (visited == null)
-            {
-                visited = new List<TNode>();
-            }
-
+            List<TNode> visited = new List<TNode>();
             Queue<TNode> queue = new Queue<TNode>();
             List<TNode> result = new List<TNode>();
 

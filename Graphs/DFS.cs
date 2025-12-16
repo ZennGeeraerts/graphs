@@ -12,13 +12,9 @@ namespace Graphs
 
         public DFS(Graph<TNode> graph) { _graph = graph; }
 
-        public List<TNode> FindPath(TNode start, TNode? dst, List<TNode>? visited = null)
+        public List<TNode> FindPath(TNode start, TNode? dst)
         {
-            if (visited == null)
-            {
-                visited = new List<TNode>();
-            }
-
+            List<TNode>  visited = new List<TNode>();
             Stack<TNode> stack = new Stack<TNode>();
             List<TNode> result = new List<TNode>();
 

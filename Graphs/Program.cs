@@ -71,34 +71,17 @@ foreach (Person node in bfsResult)
 }
 Console.WriteLine();
 
-var sets = FindConnectedSets(graph);
-Console.WriteLine("Connected sets:");
-foreach (List<Person> set in sets)
+TarjanAlgorithm<Person> tarjanAlgorithm = new TarjanAlgorithm<Person>(graph);
+var components = tarjanAlgorithm.FindStronglyConnectedComponents();
+
+Console.WriteLine("Strongly connected components:");
+foreach (List<Person> component in components)
 {
-    Console.WriteLine("Connected set found: ");
-    foreach (Person node in set)
+    Console.WriteLine("Connected component: ");
+    foreach (Person node in component)
     {
         Console.WriteLine(node);
     }
     Console.WriteLine();
 }
 Console.WriteLine();
-
-
-static List<List<Person>> FindConnectedSets(Graph<Person> graph)
-{
-    List<Person> visited = new List<Person>();
-    List<List<Person>> sets = new List<List<Person>>();
-    DFS<Person> dfs = new DFS<Person>(graph);
-
-    foreach (Person node in graph)
-    {
-        if (!visited.Contains(node))
-        {
-            var result = dfs.FindPath(node, null, visited);
-            sets.Add(result);
-        }
-    }
-
-    return sets;
-}
