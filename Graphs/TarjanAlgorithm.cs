@@ -9,12 +9,14 @@ using System.Xml.Linq;
 
 namespace Graphs
 {
-    internal class TarjanAlgorithm<TNode> where TNode : notnull
+    internal class TarjanAlgorithm<TNode, TConnection>
+        where TNode : notnull
+        where TConnection : notnull, IConnection<TNode, TConnection>
     {
-        private Graph<TNode> _graph;
+        private Graph<TNode, TConnection> _graph;
         private const int _Unvisited = -1;
 
-        public TarjanAlgorithm(Graph<TNode> graph) { _graph = graph; }
+        public TarjanAlgorithm(Graph<TNode, TConnection> graph) { _graph = graph; }
 
         public List<List<TNode>> FindStronglyConnectedComponents()
         {
@@ -56,16 +58,16 @@ namespace Graphs
             ids[node] = lowLinkValues[node] = index++;
 
             // Visit all neighbours and update the low link value to the minimum
-            LinkedList<TNode> neighbours = _graph.GetConnections(node);
-            foreach (TNode neighbour in neighbours)
+            LinkedList<TConnection> connections = _graph.GetConnections(node);
+            foreach (TConnection conn in connections)
             {
-                if (ids[neighbour] == _Unvisited)
+                if (ids[conn.To] == _Unvisited)
                 {
-                    DepthFirstSearch(neighbour, ref index, ids, lowLinkValues, stack, onStack, components);
+                    DepthFirstSearch(conn.To, ref index, ids, lowLinkValues, stack, onStack, components);
                 }
-                else if (onStack.Contains(neighbour))
+                else if (onStack.Contains(conn.To))
                 {
-                    lowLinkValues[node] = Math.Min(lowLinkValues[node], lowLinkValues[neighbour]);
+                    lowLinkValues[node] = Math.Min(lowLinkValues[node], lowLinkValues[conn.To]);
                 }
             }
 
@@ -85,7 +87,7 @@ namespace Graphs
                     if (n.Equals(node))
                         break;
                 }
-                
+
                 components.Add(component);
             }
         }

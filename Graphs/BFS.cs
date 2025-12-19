@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class BFS<TNode> where TNode : notnull
+    internal class BFS<TNode, TConnection>
+        where TNode : notnull
+        where TConnection : notnull, IConnection<TNode, TConnection>
     {
-        private Graph<TNode> _graph;
+        private Graph<TNode, TConnection> _graph;
 
-        public BFS(Graph<TNode> graph) { _graph = graph; }
+        public BFS(Graph<TNode, TConnection> graph) { _graph = graph; }
 
         public List<TNode> FindPath(TNode start, TNode? dst)
         {
@@ -34,14 +36,14 @@ namespace Graphs
                     break;
                 }
 
-                LinkedList<TNode> neighbours = _graph.GetConnections(node);
+                LinkedList<TConnection> connections = _graph.GetConnections(node);
 
-                foreach (TNode neighbour in neighbours)
+                foreach (TConnection conn in connections)
                 {
-                    if (!visited.Contains(neighbour))
+                    if (!visited.Contains(conn.To))
                     {
-                        visited.Add(neighbour);
-                        queue.Enqueue(neighbour);
+                        visited.Add(conn.To);
+                        queue.Enqueue(conn.To);
                     }
                 }
             }

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class Graph<TNode> where TNode : notnull
+    internal class Graph<TNode, TConnection>
+        where TNode : notnull
+        where TConnection : notnull, IConnection<TNode, TConnection>
     {
-        private Dictionary<TNode, LinkedList<TNode>> _nodes; // Adjacency list of nodes
+        private Dictionary<TNode, LinkedList<TConnection>> _nodes; // Adjacency list of nodes
         private bool _isDirectional;
 
         public Graph(bool isDirectional)
         {
-            _nodes = new Dictionary<TNode, LinkedList<TNode>>();
+            _nodes = new Dictionary<TNode, LinkedList<TConnection>>();
             _isDirectional = isDirectional;
         }
 
@@ -24,22 +26,27 @@ namespace Graphs
 
         public void AddNode(TNode node)
         {
-            var list = new LinkedList<TNode>();
+            var list = new LinkedList<TConnection>();
             _nodes.Add(node, list);
         }
 
-        public void AddConnection(TNode src, TNode dst)
+        public void AddConnection(TConnection connection)
         {
-            _nodes[src].AddLast(dst);
+            _nodes[connection.From].AddLast(connection);
 
             // When not directional, connection goes both ways
             if (!_isDirectional)
             {
-                _nodes[dst].AddLast(src);
+                TConnection opposite = connection.GetOpposite();
+
+                if (IsUniqueConnection(opposite))
+                {
+                    _nodes[connection.To].AddLast(opposite);
+                }
             }
         }
 
-        public LinkedList<TNode> GetConnections(TNode node)
+        public LinkedList<TConnection> GetConnections(TNode node)
         {
             return _nodes[node];
         }
@@ -47,6 +54,20 @@ namespace Graphs
         public IEnumerator<TNode> GetEnumerator()
         {
             return _nodes.Keys.GetEnumerator();
+        }
+
+        private bool IsUniqueConnection(TConnection connection)
+        {
+            foreach (LinkedList<TConnection> connections  in _nodes.Values)
+            {
+                foreach(TConnection conn in connections)
+                {
+                    if (conn.To.Equals(connection.To))
+                        return false;
+                }
+            }
+
+            return true;
         }
     }
 }

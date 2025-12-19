@@ -9,7 +9,7 @@ using Graphs;
 // |
 // p7
 
-Graph<Person> graph = new Graph<Person>(true);
+Graph<Person, Connection<Person>> graph = new Graph<Person, Connection<Person>>(true);
 
 Person p0 = new Person(0, "Calderon");
 Person p1 = new Person(1, "Whitmore");
@@ -29,20 +29,20 @@ graph.AddNode(p5);
 graph.AddNode(p6);
 graph.AddNode(p7);
 
-graph.AddConnection(p0, p1);
-graph.AddConnection(p0, p3);
+graph.AddConnection(new Connection<Person>(p0, p1));
+graph.AddConnection(new Connection<Person>(p0, p3));
 
-graph.AddConnection(p1, p2);
+graph.AddConnection(new Connection<Person>(p1, p2));
 
-graph.AddConnection(p3, p4);
-graph.AddConnection(p3, p6);
-graph.AddConnection(p3, p7);
+graph.AddConnection(new Connection<Person>(p3, p4));
+graph.AddConnection(new Connection<Person>(p3, p6));
+graph.AddConnection(new Connection<Person>(p3, p7));
 
-graph.AddConnection(p4, p2);
-graph.AddConnection(p4, p5);
+graph.AddConnection(new Connection<Person>(p4, p2));
+graph.AddConnection(new Connection<Person>(p4, p5));
 
-graph.AddConnection(p5, p4);
-graph.AddConnection(p5, p2);
+graph.AddConnection(new Connection<Person>(p5, p4));
+graph.AddConnection(new Connection<Person>(p5, p2));
 
 Console.WriteLine("People:");
 foreach (Person node in graph)
@@ -51,7 +51,7 @@ foreach (Person node in graph)
 }
 Console.WriteLine();
 
-DFS<Person> dfs = new DFS<Person>(graph);
+DFS<Person, Connection<Person>> dfs = new DFS<Person, Connection<Person>>(graph);
 List<Person> dfsResult = dfs.FindPath(p0, p5);
 
 Console.WriteLine("Depth first search:");
@@ -61,7 +61,7 @@ foreach (Person node in dfsResult)
 }
 Console.WriteLine();
 
-BFS<Person> bfs = new BFS<Person>(graph);
+BFS<Person, Connection<Person>> bfs = new BFS<Person, Connection<Person>>(graph);
 List<Person> bfsResult = bfs.FindPath(p0, p5);
 
 Console.WriteLine("Breadth first search:");
@@ -71,7 +71,7 @@ foreach (Person node in bfsResult)
 }
 Console.WriteLine();
 
-TarjanAlgorithm<Person> tarjanAlgorithm = new TarjanAlgorithm<Person>(graph);
+TarjanAlgorithm<Person, Connection<Person>> tarjanAlgorithm = new TarjanAlgorithm<Person, Connection<Person>>(graph);
 var components = tarjanAlgorithm.FindStronglyConnectedComponents();
 
 Console.WriteLine("Strongly connected components:");
