@@ -8,10 +8,10 @@ namespace Graphs
 {
     internal interface IConnection<TNode, TConcrete>
         where TNode : notnull
-        where TConcrete : IConnection<TNode, TConcrete>
+        where TConcrete : notnull, IConnection<TNode, TConcrete>
     {
-        TNode From { get; }
-        TNode To { get; }
+        public TNode From { get; }
+        public TNode To { get; }
 
         public TConcrete GetOpposite();
     }

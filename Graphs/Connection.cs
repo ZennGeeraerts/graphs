@@ -17,13 +17,13 @@ namespace Graphs
             _from = from;
             _to = to;
         }
+
         public TNode From { get { return _from; } }
         public TNode To { get { return _to; } }
 
-        public Connection<TNode> GetOpposite()
+        public virtual Connection<TNode> GetOpposite()
         {
-            Connection<TNode> opposite = new Connection<TNode>(_to, _from);
-            return opposite;
+            return new Connection<TNode>(_to, _from);
         }
     }
 }
