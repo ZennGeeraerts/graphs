@@ -1,13 +1,14 @@
 ﻿using SocialNetwork;
 using Graphs;
+using Graphs.Algorithms;
 
-    // p0—p1—p2
-    // |     |
-    // p3—p4—p5
-    // |
-    // p6
-    // |
-    // p7
+// p0—p1—p2
+// |     |
+// p3—p4—p5
+// |
+// p6
+// |
+// p7
 
 Graph<Person, Connection<Person>> graph = new Graph<Person, Connection<Person>>(true);
 Person p0 = new Person(0, "Calderon");

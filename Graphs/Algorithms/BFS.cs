@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Graphs
+namespace Graphs.Algorithms
 {
     public class BFS<TNode, TConnection>
         where TNode : notnull
