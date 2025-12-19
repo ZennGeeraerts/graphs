@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Graphs
+namespace Graphs.Algorithms
 {
     public class DFS<TNode, TConnection>
         where TNode : notnull

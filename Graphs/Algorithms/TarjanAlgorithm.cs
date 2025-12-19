@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Graphs
+namespace Graphs.Algorithms
 {
     public class TarjanAlgorithm<TNode, TConnection>
         where TNode : notnull
