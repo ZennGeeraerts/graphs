@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal interface IConnection<TNode, TConcrete>
+    public interface IConnection<TNode, TConcrete>
         where TNode : notnull
         where TConcrete : notnull, IConnection<TNode, TConcrete>
     {

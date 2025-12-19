@@ -1,16 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using SocialNetwork;
 using Graphs;
 
-// p0—p1—p2
-// |     |
-// p3—p4—p5
-// |
-// p6
-// |
-// p7
+    // p0—p1—p2
+    // |     |
+    // p3—p4—p5
+    // |
+    // p6
+    // |
+    // p7
 
 Graph<Person, Connection<Person>> graph = new Graph<Person, Connection<Person>>(true);
-
 Person p0 = new Person(0, "Calderon");
 Person p1 = new Person(1, "Whitmore");
 Person p2 = new Person(2, "Novak");
@@ -31,7 +30,6 @@ graph.AddNode(p7);
 
 graph.AddConnection(new Connection<Person>(p0, p1));
 graph.AddConnection(new Connection<Person>(p0, p3));
-
 graph.AddConnection(new Connection<Person>(p1, p2));
 
 graph.AddConnection(new Connection<Person>(p3, p4));
@@ -50,27 +48,22 @@ foreach (Person node in graph)
     Console.WriteLine(node);
 }
 Console.WriteLine();
-
 DFS<Person, Connection<Person>> dfs = new DFS<Person, Connection<Person>>(graph);
 List<Person> dfsResult = dfs.FindPath(p0, p5);
-
 Console.WriteLine("Depth first search:");
 foreach (Person node in dfsResult)
 {
     Console.WriteLine(node);
 }
 Console.WriteLine();
-
 BFS<Person, Connection<Person>> bfs = new BFS<Person, Connection<Person>>(graph);
 List<Person> bfsResult = bfs.FindPath(p0, p5);
-
 Console.WriteLine("Breadth first search:");
 foreach (Person node in bfsResult)
 {
     Console.WriteLine(node);
 }
 Console.WriteLine();
-
 TarjanAlgorithm<Person, Connection<Person>> tarjanAlgorithm = new TarjanAlgorithm<Person, Connection<Person>>(graph);
 var components = tarjanAlgorithm.FindStronglyConnectedComponents();
 

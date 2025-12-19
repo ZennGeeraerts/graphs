@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class WeightedConnection<TNode> : IConnection<TNode, WeightedConnection<TNode>>
+    public class WeightedConnection<TNode> : IConnection<TNode, WeightedConnection<TNode>>
         where TNode : notnull
     {
         private TNode _from;

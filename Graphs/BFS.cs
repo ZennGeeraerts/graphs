@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class BFS<TNode, TConnection>
+    public class BFS<TNode, TConnection>
         where TNode : notnull
         where TConnection : notnull, IConnection<TNode, TConnection>
     {

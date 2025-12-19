@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace Graphs
 {
-    internal class TarjanAlgorithm<TNode, TConnection>
+    public class TarjanAlgorithm<TNode, TConnection>
         where TNode : notnull
         where TConnection : notnull, IConnection<TNode, TConnection>
     {

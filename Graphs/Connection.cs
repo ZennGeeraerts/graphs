@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class Connection<TNode> : IConnection<TNode, Connection<TNode>>
+    public class Connection<TNode> : IConnection<TNode, Connection<TNode>>
         where TNode : notnull
     {
         private TNode _from;
