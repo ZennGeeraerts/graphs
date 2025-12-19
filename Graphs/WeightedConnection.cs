@@ -6,20 +6,26 @@ using System.Threading.Tasks;
 
 namespace Graphs
 {
-    internal class WeightedConnection<TNode> : Connection<TNode>
+    internal class WeightedConnection<TNode> : IConnection<TNode, WeightedConnection<TNode>>
         where TNode : notnull
     {
-        private float _weight = 0;
-        public WeightedConnection(TNode from, TNode to, float weight) : base(from, to)
+        private TNode _from;
+        private TNode _to;
+        private double _weight = 0;
+        public WeightedConnection(TNode from, TNode to, double weight)
         {
+            _from = from;
+            _to = to;
             _weight = weight;
         }
 
-        public float Weight { get { return _weight; } }
+        public TNode From { get { return _from; } }
+        public TNode To { get { return _to; } }
+        public double Weight { get { return _weight; } }
 
-        public override Connection<TNode> GetOpposite()
+        public WeightedConnection<TNode> GetOpposite()
         {
-            return new WeightedConnection<TNode>(To, From, _weight);
+            return new WeightedConnection<TNode>(_to, _from, _weight);
         }
     }
 }

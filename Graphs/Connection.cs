@@ -21,7 +21,7 @@ namespace Graphs
         public TNode From { get { return _from; } }
         public TNode To { get { return _to; } }
 
-        public virtual Connection<TNode> GetOpposite()
+        public Connection<TNode> GetOpposite()
         {
             return new Connection<TNode>(_to, _from);
         }
